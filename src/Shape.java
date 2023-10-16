@@ -12,9 +12,8 @@ class Pyramid implements Shape {
     }
 
     public void getVolume() {
-        //System.out.println("dddd");
-        //String pyramidDescripion = "Объем пирамиды с " + baseLength + height + " основанием и высотой соответственно";
-        System.out.println("объем пирамиды" + (1.0 / 3) * Math.pow(baseLength, 2) * height);
+        String pyramidDescripion = "Объем пирамиды с " + baseLength + ", " + height + " основанием и высотой соответственно --- ";
+        System.out.println(pyramidDescripion + (1.0 / 3) * Math.pow(baseLength, 2) * height);
     }
     public static void main(String []args) {
         Pyramid pyramid = new Pyramid();
