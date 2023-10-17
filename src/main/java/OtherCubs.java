@@ -1,3 +1,4 @@
+
 class OtherCubs {
     public static void main(String []args) {
         double side = 3;
