@@ -1,0 +1,7 @@
+name: PleaseStartWork
+version: 1.0.0
+main: me.amir.PleaseStartWork
+description: An example plugin
+author: PaperMC
+website: https://papermc.io
+api-version: '1.20'
