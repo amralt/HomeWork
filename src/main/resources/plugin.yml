@@ -1,0 +1,4 @@
+name: Jumping
+version: '${version}'
+main: me.amir.jumping.Jumping
+api-version: '1.20'
