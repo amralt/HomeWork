@@ -1,0 +1,4 @@
+name: commands
+version: '${version}'
+main: me.amir.commands.Commands
+api-version: '1.20'
