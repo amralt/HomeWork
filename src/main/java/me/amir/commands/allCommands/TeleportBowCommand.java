@@ -19,7 +19,7 @@ public class TeleportBowCommand extends BaseCommand {
     @Subcommand("common")
     public boolean onBow(CommandSender sender, String bowType){
         if (sender instanceof Player player) {
-            if (player.hasPermission("tpbow.givebow") & bowType.isEmpty()) {
+            if (bowType.isEmpty() || bouType.isEqual("teleport") {
 
                 ItemStack teleportBow = BowUtil.createTeleportBow();
                 player.getInventory().addItem(teleportBow);
