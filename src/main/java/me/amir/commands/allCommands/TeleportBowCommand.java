@@ -12,45 +12,26 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.awt.*;
+import java.util.Objects;
 
 @CommandAlias("bow")
 public class TeleportBowCommand extends BaseCommand {
     @Default
-    @Subcommand("common")
     public boolean onBow(CommandSender sender, String bowType){
         if (sender instanceof Player player) {
-            if (player.hasPermission("tpbow.givebow") & bowType.isEmpty()) {
-
-
+            if (player.hasPermission("tpbow.givebow") & !player.getInventory().contains(BowUtil.createTeleportBow())) {
 
                 ItemStack teleportBow = BowUtil.createTeleportBow();
                 player.getInventory().addItem(teleportBow);
                 player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
                 player.sendMessage(Component.text(Color.cyan + "телепортирующий лук выдан"));
             }
-            else{
-                ItemStack commonBow = BowUtil.createCommonBow();
-                player.getInventory().addItem(commonBow);
-            }
+//            else{
+//                player.getInventory().addItem(new ItemStack(Material.BOW,1));
+//                player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+//            }
 
         }
         return true;
     }
-
-//    @Override
-//    public boolean onCommand(@NotNull CommandSender sender) {
-//        if (sender instanceof Player player) {
-//            if (player.hasPermission("tpbow.givebow")) {
-//
-//
-////                Player target = Bukkit.getPlayerExact(player.getName());
-//
-//                ItemStack bow = BowUtil.createTeleportBow();
-//                player.getInventory().addItem(bow);
-//                player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
-//                player.sendMessage(Component.text(Color.cyan + "телепортирующий лук выдан"));
-//            }
-//        }
-//        return true;
-//    }
 }
