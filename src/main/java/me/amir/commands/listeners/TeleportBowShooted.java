@@ -1,6 +1,7 @@
 package me.amir.commands.listeners;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ public class TeleportBowShooted implements Listener {
                 Location location = event.getEntity().getLocation();
                 p.teleport(location);
                 event.getEntity().remove();
-                p.sendMessage(Component.text(Color.green + "You was teleported" ));
+                p.sendMessage(Component.text("you was teleported" + 0x74D51C));
             }
         }
 
