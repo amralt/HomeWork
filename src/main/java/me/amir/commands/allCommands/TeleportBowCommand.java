@@ -19,10 +19,7 @@ public class TeleportBowCommand extends BaseCommand {
     @Subcommand("common")
     public boolean onBow(CommandSender sender, String bowType){
         if (sender instanceof Player player) {
-            if (player.hasPermission("tpbow.givebow") & bowType.isEmpty()) {
-
-
-
+            if (player.hasPermission("tpbow.givebow") & bowType.isEmpty() & !player.getInventory().contains(BowUtil.createTeleportBow()) {
                 ItemStack teleportBow = BowUtil.createTeleportBow();
                 player.getInventory().addItem(teleportBow);
                 player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
@@ -32,25 +29,8 @@ public class TeleportBowCommand extends BaseCommand {
                 ItemStack commonBow = BowUtil.createCommonBow();
                 player.getInventory().addItem(commonBow);
             }
-
         }
         return true;
     }
 
-//    @Override
-//    public boolean onCommand(@NotNull CommandSender sender) {
-//        if (sender instanceof Player player) {
-//            if (player.hasPermission("tpbow.givebow")) {
-//
-//
-////                Player target = Bukkit.getPlayerExact(player.getName());
-//
-//                ItemStack bow = BowUtil.createTeleportBow();
-//                player.getInventory().addItem(bow);
-//                player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
-//                player.sendMessage(Component.text(Color.cyan + "телепортирующий лук выдан"));
-//            }
-//        }
-//        return true;
-//    }
 }
