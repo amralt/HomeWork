@@ -19,16 +19,18 @@ public class TeleportBowCommand extends BaseCommand {
     @Subcommand("common")
     public boolean onBow(CommandSender sender, String bowType){
         if (sender instanceof Player player) {
-            if (player.hasPermission("tpbow.givebow") & bowType.isEmpty() & !player.getInventory().contains(BowUtil.createTeleportBow()) {
+            if (player.hasPermission("tpbow.givebow") & bowType.isEmpty()) {
+
                 ItemStack teleportBow = BowUtil.createTeleportBow();
                 player.getInventory().addItem(teleportBow);
                 player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
                 player.sendMessage(Component.text(Color.cyan + "телепортирующий лук выдан"));
             }
-            else{
-                ItemStack commonBow = BowUtil.createCommonBow();
-                player.getInventory().addItem(commonBow);
+            else if(Objects.equals(bowType, "common")){
+                player.getInventory().addItem(new ItemStack(Material.BOW,1));
+                player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
             }
+
         }
         return true;
     }
