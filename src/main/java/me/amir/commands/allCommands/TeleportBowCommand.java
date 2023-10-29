@@ -24,7 +24,7 @@ public class TeleportBowCommand extends BaseCommand {
                 ItemStack teleportBow = BowUtil.createTeleportBow();
                 player.getInventory().addItem(teleportBow);
                 player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
-                player.sendMessage(Component.text(Color.cyan + "телепортирующий лук выдан"));
+                layer.sendMessage(Component.text("телепортирующий лук выдан").color(TextColor.color(0xF211FF)));
             }
             else if(Objects.equals(bowType, "common")){
                 player.getInventory().addItem(new ItemStack(Material.BOW,1));
