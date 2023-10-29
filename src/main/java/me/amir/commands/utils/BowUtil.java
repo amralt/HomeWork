@@ -26,4 +26,7 @@ public class BowUtil {
 
         return bow;
     }
+    public static ItemStack createCommonBow(){
+        return new ItemStack(Material.BOW,1);
+    }
 }
