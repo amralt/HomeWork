@@ -1,0 +1,4 @@
+name: shop
+version: '${version}'
+main: me.amir.shop.Shop
+api-version: '1.20'
