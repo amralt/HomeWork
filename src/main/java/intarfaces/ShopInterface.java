@@ -6,7 +6,6 @@ import dev.triumphteam.gui.components.GuiType;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
-import me.amir.shop.Shop;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;
@@ -35,7 +34,6 @@ public class ShopInterface {
                 .rows(4)
                 .create();
         GuiItem closePayBox = ItemBuilder.from(new ItemStack(Material.RED_BANNER)).asGuiItem(event -> {
-            event.setCancelled(true);
             guiPayBox.close(player);
         });
         guiPayBox.addItem(closePayBox);
@@ -45,7 +43,6 @@ public class ShopInterface {
         countBlockItemMeta.displayName(Component.text("plus").color(TextColor.color(0xFFFA1C)));
         countBlock.setItemMeta(countBlockItemMeta);
         GuiItem plusItem = ItemBuilder.from(countBlock).asGuiItem(event -> {
-            event.setCancelled(true);
             event.getCursor().displayName();
             if (event.getClick().isMouseClick()){
                 if ((userCount < itemCount)){
@@ -58,7 +55,6 @@ public class ShopInterface {
 
         ItemStack currentItem = new ItemStack(Material.valueOf(itemName));
         GuiItem guiItem = ItemBuilder.from(currentItem).asGuiItem(event -> {
-            event.setCancelled(true);
         });
         guiPayBox.addItem(guiItem);
 
@@ -69,16 +65,21 @@ public class ShopInterface {
         bayBlock.setItemMeta(bayBlockMeta);
 
         GuiItem acceptBay = ItemBuilder.from(bayBlock).asGuiItem(event -> {
-            event.setCancelled(true);
             event.getCursor().displayName();
             if (event.getClick().isMouseClick()) {
                 ItemStack cost = new ItemStack(Material.GOLD_INGOT, itemPrice*userCount);
+                System.out.println("gold ignot "+itemPrice*userCount);
                 player.getInventory().remove(cost);
                 player.getInventory().addItem(new ItemStack(Material.valueOf(itemName), userCount));
                 guiPayBox.close(player);
             }
         });
         guiPayBox.addItem(acceptBay);
+
+        guiPayBox.setDefaultClickAction(event -> {
+            // Handle your default action here
+            event.setCancelled(true);
+        });
 
 
         System.out.println("all is good");
@@ -87,24 +88,23 @@ public class ShopInterface {
 
         return new NewConfig(itemName,itemCount);
     }
-    public static void createShop(Shop plugin, Player player) {
+    public static void createShop(List<Map<?, ?>> itemsGoods , Player player) {
 
         @NotNull PaginatedGui gui = Gui.paginated()
                 .title(Component.text("first shop" + Color.ORANGE))
-                .rows(6)
-                .pageSize(45)
+                .rows(4)
                 .create();
-        gui.setItem(6, 1, ItemBuilder.from(Material.PAPER).name(Component.text("Previous")).asGuiItem(event -> {
+        gui.setItem(4, 1, ItemBuilder.from(Material.PAPER).name(Component.text("Previous")).asGuiItem(event -> {
             gui.previous();
         }));
-        gui.setItem(6, 9, ItemBuilder.from(Material.PAPER).name(Component.text("last")).asGuiItem(event -> {
+        gui.setItem(4, 9, ItemBuilder.from(Material.PAPER).name(Component.text("Next")).asGuiItem(event -> {
             gui.next();
         }));
         //TODO здесь будет обработка конфигов.
-        List<Map<?, ?>> itemsGoods = plugin.getConfig().getMapList("items");
+//        List<Map<?, ?>> itemsGoods = plugin.getConfig().getMapList("items");
         for (Map<?,?> mapGoods : itemsGoods) {
             String itemName = String.valueOf(mapGoods.get("material"));
-//            System.out.println(itemName);
+            System.out.println(itemName);
             String itemPrice = String.valueOf(mapGoods.get("price"));
 //            System.out.println(itemPrice);
             String itemCount = String.valueOf(mapGoods.get("count"));
@@ -122,7 +122,7 @@ public class ShopInterface {
 
                 event.getCursor().displayName();
                 NewConfig newConfig = createPayBox(itemName, priceCurrentItem, countCurrentItem, player);
-                plugin.getConfig().set("items." + newConfig.name() +".count", countCurrentItem - newConfig.count());
+//                plugin.getConfig().set("items." + newConfig.name() +".count", countCurrentItem - newConfig.count());
                 System.out.println("items." + newConfig.name() +".count");
             });
 //            TODO сделать вывод еще мини-окна с выбором кол-ва и покупкой предмета
