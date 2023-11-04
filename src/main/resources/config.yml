@@ -1,17 +1,17 @@
 items:
-  STONE:
+  -
     material: STONE
-    price: 0
+    price: 1
     count: 64
-  APPLE:
+  -
     material: APPLE
     price: 1
     count: 8
-  GOLDEN_APPLE:
+  -
     material: GOLDEN_APPLE
     price: 100
     count: 3
-  BAMBOO:
+  -
     material: BAMBOO
     price: 2
     count: 64

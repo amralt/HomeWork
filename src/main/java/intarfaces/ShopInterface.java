@@ -6,6 +6,7 @@ import dev.triumphteam.gui.components.GuiType;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
+import me.amir.shop.Shop;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;
@@ -66,13 +67,14 @@ public class ShopInterface {
 
         GuiItem acceptBay = ItemBuilder.from(bayBlock).asGuiItem(event -> {
             event.getCursor().displayName();
-            if (event.getClick().isMouseClick()) {
-                ItemStack cost = new ItemStack(Material.GOLD_INGOT, itemPrice*userCount);
-                System.out.println("gold ignot "+itemPrice*userCount);
-                player.getInventory().remove(cost);
-                player.getInventory().addItem(new ItemStack(Material.valueOf(itemName), userCount));
-                guiPayBox.close(player);
-            }
+
+            ItemStack cost = new ItemStack(Material.GOLD_INGOT, itemPrice*userCount);
+            System.out.println("gold ignot "+itemPrice*userCount);
+            player.getInventory().removeItem(cost);
+            System.out.println("wow, money");
+            player.getInventory().addItem(new ItemStack(Material.valueOf(itemName), userCount));
+            guiPayBox.close(player);
+
         });
         guiPayBox.addItem(acceptBay);
 
@@ -88,7 +90,7 @@ public class ShopInterface {
 
         return new NewConfig(itemName,itemCount);
     }
-    public static void createShop(List<Map<?, ?>> itemsGoods , Player player) {
+    public static void createShop(Shop plugin , Player player) {
 
         @NotNull PaginatedGui gui = Gui.paginated()
                 .title(Component.text("first shop" + Color.ORANGE))
@@ -101,7 +103,7 @@ public class ShopInterface {
             gui.next();
         }));
         //TODO здесь будет обработка конфигов.
-//        List<Map<?, ?>> itemsGoods = plugin.getConfig().getMapList("items");
+        List<Map<?, ?>> itemsGoods = plugin.getConfig().getMapList("items");
         for (Map<?,?> mapGoods : itemsGoods) {
             String itemName = String.valueOf(mapGoods.get("material"));
             System.out.println(itemName);

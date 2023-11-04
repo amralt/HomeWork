@@ -24,7 +24,7 @@ public class ShopCommand extends BaseCommand {
     public void onShop(Player player){
         @NotNull List<Map<?, ?>> itemsGoods = plugin.getConfig().getMapList("items");
         System.out.println(itemsGoods);
-        createShop(itemsGoods, player);
+        createShop(plugin, player);
 //        gui.open(player);
 
     }
