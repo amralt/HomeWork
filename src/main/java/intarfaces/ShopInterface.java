@@ -92,15 +92,13 @@ public class ShopInterface {
         @NotNull PaginatedGui gui = Gui.paginated()
                 .title(Component.text("first shop" + Color.ORANGE))
                 .rows(6)
-                .pageSize(10)
+                .pageSize(45)
                 .create();
-        gui.setItem(6, 1, ItemBuilder.from(Material.PAPER).setName("Previous").asGuiItem(event -> {
+        gui.setItem(6, 1, ItemBuilder.from(Material.PAPER).name(Component.text("Previous")).asGuiItem(event -> {
             gui.previous();
-            event.setCancelled(true);
         }));
-        gui.setItem(6, 10, ItemBuilder.from(Material.PAPER).setName("Next").asGuiItem(event -> {
+        gui.setItem(6, 9, ItemBuilder.from(Material.PAPER).name(Component.text("last")).asGuiItem(event -> {
             gui.next();
-            event.setCancelled(true);
         }));
         //TODO здесь будет обработка конфигов.
         List<Map<?, ?>> itemsGoods = plugin.getConfig().getMapList("items");
@@ -121,7 +119,7 @@ public class ShopInterface {
             int priceCurrentItem = Integer.parseInt(itemPrice);
             int countCurrentItem = Integer.parseInt(itemCount);
             GuiItem guiItem = ItemBuilder.from(currentItem).asGuiItem(event ->{
-                event.setCancelled(true);
+
                 event.getCursor().displayName();
                 NewConfig newConfig = createPayBox(itemName, priceCurrentItem, countCurrentItem, player);
                 plugin.getConfig().set("items." + newConfig.name() +".count", countCurrentItem - newConfig.count());
@@ -132,6 +130,12 @@ public class ShopInterface {
 
             gui.addItem(guiItem);
         }
+
+
+        gui.setDefaultClickAction(event -> {
+            // Handle your default action here
+            event.setCancelled(true);
+        });
 
 
         gui.open(player);
