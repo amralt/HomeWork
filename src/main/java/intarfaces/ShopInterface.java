@@ -93,7 +93,7 @@ public class ShopInterface {
     public static void createShop(Shop plugin , Player player) {
 
         @NotNull PaginatedGui gui = Gui.paginated()
-                .title(Component.text("first shop" + Color.ORANGE))
+                .title(Component.text("first shop" ).color(TextColor.color(0xFFFA1C)))
                 .rows(4)
                 .create();
         gui.setItem(4, 1, ItemBuilder.from(Material.PAPER).name(Component.text("Previous")).asGuiItem(event -> {
