@@ -12,15 +12,13 @@ public final class Shop extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-//        @NotNull FileConfiguration config = this.getConfig();
-        saveDefaultConfig();
+        System.out.println(this.getConfig().getMapList("items"));
 
         BukkitCommandManager bukkitCommandManager = new BukkitCommandManager(this);
 
         bukkitCommandManager.registerCommand(new ShopCommand(this));
         bukkitCommandManager.registerCommand(new GetMoney());
         System.out.println("hii");
-
     }
 
     @Override
